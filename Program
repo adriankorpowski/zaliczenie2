@@ -1,0 +1,67 @@
+package zaliczenie;
+
+import java.util.Random;
+
+public class zaliczenie2 {
+
+	public static void main(String[] args) {
+		Random r = new Random(); //tworzenie klasy Random
+		int los = r.nextInt(11)+10; //zmienna przechowująca rozmiar wymiaru tabeli
+		int max2 = 0, max = 0, suma1 = 0, suma2 = 0, komorki = 0; //zmienne do przechowywania wyników obliczeń
+		double a = 0.0; //zmienna do która przechowywuje wyniki obliczeń
+		int[][] tablica = new int[los][los]; 
+		for(int i=0; i<tablica.length; i++){
+     	for(int j=0; j<tablica[i].length; j++){
+     			if(i !=j){
+     				tablica[i][j] = r.nextInt(201)-100; 
+     	        }
+     			else{
+     				if(r.nextInt(101) <= 35){
+     					tablica[i][j] = 1;
+     				}
+     				else{
+     					tablica[i][j] = -1;
+     			}
+     			}
+     			 if(tablica[i][j] > max){
+                     max2 = max;
+                     max=tablica[i][j];
+                     }
+                     else if(tablica[i][j] > max2 && tablica[i][j] != max){
+                         max2 = tablica[i][j];
+                     }
+				if( i % 2 == 0){
+ 					suma1 += tablica[i][j];
+ 				}
+				if( j % 2 == 1){
+ 					suma2 += tablica[i][j];
+ 				}
+ 				if(tablica[i][j] < j*i){
+ 					komorki++;
+ 			}
+     		}
+		    }
+		boolean[][] tablica2 = new boolean[los][los];
+		int suma = 0;
+		for (int i = 0; i<tablica2.length; i++){
+     		for (int j = 0; j<tablica2[i].length; j++){
+				if(r.nextInt(2) == 0){
+					tablica2[i][j] = false;
+				}
+				else{
+					tablica2[i][j] = true;
+					suma ++; // tablica[i][j] ??????
+			}
+     		}
+     		
+     		
+		    }
+		a = (double)suma1/suma2;
+		System.out.format("Suma wszystkich elementów dla których odpowiednia wartość w drugiej tabeli jest true równa się %d.\n", suma);
+		System.out.format("Dwie maksymalne liczby wynoszą: %d i %d.\n", max2, max);
+		System.out.format("Stosunek sumy liczb leżących w komórkach o parzystych indeksach wierszy i nieparzystych indeksach kolumn równa się: %.3f.\n", a);
+		System.out.format("Liczba komórek o wartości mniejszej od iloczynu indeksu wiersza i kolumny tej komórki równa się: %d.", komorki);
+
+	}
+
+}
